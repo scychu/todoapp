@@ -1,0 +1,51 @@
+$primary-color: #0078D7;
+$background-color:#E5E5E5;
+$second-color:#C4C4C4;
+$important-color:#FEC112;
+
+@mixin whiteColor {
+    color:#fff;
+    top:30%;
+    position: relative;
+}
+
+@mixin mixin-button {
+    width: 12em;
+    padding:1em;
+    border-radius: 2.5rem;
+    background-color: transparent;
+    border:1px solid $second-color;
+    font-weight: bold;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+@mixin btn-hover {
+    background-color: #fff;
+    color:$primary-color;
+}
+
+@mixin mixin-input {
+    display: block;
+    margin:1em;
+    padding:0.5em;
+    border-radius: 0.4em;
+    border:1px solid $second-color;
+    font-size:1em;
+    width: 90%;
+    box-sizing:border-box;
+}
+@mixin medsos-icon {
+    width:4rem;
+    height:4rem;
+    border:2px solid #C4C4C4;
+    border-radius: 2rem;
+    margin:1em;
+    padding:1rem;
+    box-sizing:border-box;
+    display: inline-block;
+    color:#000;
+    transition-duration: 0.4s;
+}
+@mixin icon-hover {
+    color:$primary-color;
+}

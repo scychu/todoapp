@@ -1,0 +1,81 @@
+@import "./variable.scss";
+
+
+.register-wrapper {
+    display:flex;
+    margin:3% auto;
+    box-shadow: 2px 10px 8px 10px #888888;
+    width: fit-content;
+}
+
+.left-div {
+    background-color: $primary-color;
+    padding:1em;
+    width: 18vw;
+    height:80vh;
+    text-align: center;
+    position: relative;
+    align-items: center;
+    h2 {
+        font-size: 2em;
+        @include whiteColor
+    }
+    p { 
+        @include whiteColor
+    }
+    button {
+        @include mixin-button;
+        color:#fff;
+        margin:80% auto;
+    }
+    button:hover {
+        @include btn-hover;
+    }
+}
+
+.right-div {
+    background-color: #fff;
+    padding: 0 2em;
+    text-align: center;
+    h1 {
+        padding-top: 0.5em;
+        font-size: 2em;
+        color:$primary-color;
+        font-weight: bold;
+    }
+    p{
+        color:$second-color;
+        font-weight:bold;
+    }
+    .icons-container {
+        ul {
+            padding:0;
+        }
+        li {
+            display:inline-block;
+            list-style: none;
+        }
+        .media-icon {
+            @include medsos-icon;
+        }
+        .media-icon{
+           :hover{
+                @include icon-hover;
+            }
+        }
+    }
+    input {
+       @include mixin-input;
+    }
+    button {
+        @include mixin-button;
+        background-color: $primary-color;
+        color:#fff;
+    }
+    button:hover {
+        @include btn-hover;
+    }
+}
+
+
+
