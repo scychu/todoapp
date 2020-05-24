@@ -18,6 +18,7 @@ $important-color:#FEC112;
     font-weight: bold;
     transition-duration: 0.4s;
     cursor: pointer;
+    color:#fff;
 }
 @mixin btn-hover {
     background-color: #fff;
@@ -26,6 +27,7 @@ $important-color:#FEC112;
 
 @mixin mixin-input {
     display: block;
+    bottom:0;
     margin:1em;
     padding:0.5em;
     border-radius: 0.4em;
@@ -35,11 +37,11 @@ $important-color:#FEC112;
     box-sizing:border-box;
 }
 @mixin medsos-icon {
-    width:4rem;
-    height:4rem;
+    width:4em;
+    height:4em;
     border:2px solid #C4C4C4;
     border-radius: 2rem;
-    margin:1em;
+    margin:1vh;
     padding:1rem;
     box-sizing:border-box;
     display: inline-block;
