@@ -10,7 +10,7 @@ const SignIn = ()=> {
                 <div className="left-wrapper">
                     <h2>Hello, Friend!</h2>
                     <p>Enter your personal details and start your journey with us
-                    <button> SIGN UP</button>
+                    <Link to ="/" className="link" ><button>SIGN UP</button></Link>
                     </p>
                     
                 </div>
@@ -35,7 +35,7 @@ const SignIn = ()=> {
                         placeholder="Password"
                         />
                     </div>
-                    <button>SIGN IN</button>
+                    <Link to ="/dashboard" className="link" ><button>SIGN IN</button></Link>
                 </div>
             </div>
 

@@ -11,7 +11,7 @@ const RegisterForm=()=> {
                 <div className="left-wrapper">
                     <h2>Welcome Back!</h2>
                     <p>To keep connected with us please login with your personal info
-                        <button> SIGN IN</button>
+                        <Link to ="/sign-in" className="link" ><button>SIGN IN</button></Link>
                     </p>
                 </div>
             </div>
@@ -38,7 +38,7 @@ const RegisterForm=()=> {
                         placeholder="Password"
                         />
                     </div>
-                    <button>SIGN UP</button>
+                    <Link to ="/dashboard" className="link" ><button>SIGN UP</button></Link>
                 </div>
             </div>
         </div>

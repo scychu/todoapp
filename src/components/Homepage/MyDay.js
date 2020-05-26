@@ -1,13 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import "../../style/sass/Dashboard.scss";
+import "../../style/sass/RegisterForm.scss";
 import { FaPlus, FaStar, FaTrash, FaPencilAlt, FaUserCircle} from "react-icons/fa";
 
-class Homepage extends React.Component {
+class MyDay extends React.Component {
 
     render(){
         return(
-            <div className="homepage-wrapper">
+            <div className="my-day_wrapper">
                 <div className="header">
                     <div className="header-nav">
                     <Link to ="/sign-in" className="link" ><button>SIGN OUT</button></Link>
@@ -143,4 +143,4 @@ class Homepage extends React.Component {
     }
 }
 
-export default Homepage;
+export default MyDay;

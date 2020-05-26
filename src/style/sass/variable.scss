@@ -72,8 +72,13 @@ $important-color:#FEC112;
 
 @mixin link-style {
     text-decoration: none;
-    color:rgb(19, 19, 19);
     font-weight:lighter;
+}
+
+@mixin link-clicked {
+    background-color: #fff;
+    border-radius: 0.2em;
+    box-shadow :2px 2px 2px 2px #888888;
 }
 
 @mixin link-hover {
