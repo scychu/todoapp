@@ -37,6 +37,7 @@ $important-color:#FEC112;
     width: 90%;
     box-sizing:border-box;
 }
+
 @mixin medsos-icon {
     width:4em;
     height:4em;
@@ -56,7 +57,7 @@ $important-color:#FEC112;
 @mixin icons {
     width:1em;
     height:1em;
-    padding:0.5em;
+    padding:1em;
     cursor: pointer;
 }
 

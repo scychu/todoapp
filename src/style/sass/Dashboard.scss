@@ -89,22 +89,8 @@
             margin-top:1em;
             margin-left:1em;
             box-sizing: border-box;
-            width:65%;
+            width:70%;
             height:75vh;
-            .add-todo {
-                    @include todo-style;
-                    padding:1em;
-                input{
-                    border:none;
-                    border-bottom: 2px solid $second-color;
-                    width:100%;
-                    padding:1em;
-                }
-                .add-icon{
-                    color:$second-color;
-                    @include icons;
-                }
-            }
             .task-list {
                 .todo-title {
                     width:29vw;
@@ -116,37 +102,42 @@
                     position: relative;
                     height:50vh;
                     .todo-list {
-                        @include todo-style;
-                        padding:0 1em;
-                        margin-bottom: 1em;
+                        form{
                         
-                        p {
-                            font-size: 1vw;
-                            padding-left:1em;
-                        }
-                        .icon{
-                           @include icons;
-                           
-                        }
-                        .important {
-                            position: absolute;
-                            color:$background-color;
-                            right:35%;
-                            :hover {
-                                color:$important-color;
+                            @include todo-style;
+                            height:3em;
+                            padding:0 1em;
+                            margin-bottom: 1em;
+                            p {
+                                font-size: 1vw;
+                                padding-left:1em;
+                                width:15em;
+                                overflow:hidden
                             }
-                        }
-                        .edit {
-                            position: absolute;
-                            right:15%;
-                        }
-                        .delete {
-                            position: absolute;
-                            right:0%;
-                        }
-                        .check {
-                            position: absolute;
-                            visibility: collapse;
+                            .icon{
+                            @include icons;
+                            
+                            }
+                            .important {
+                                position: absolute;
+                                color:$background-color;
+                                right:35%;
+                                :hover {
+                                    color:$important-color;
+                                }
+                            }
+                            .edit {
+                                position: absolute;
+                                right:15%;
+                            }
+                            .delete {
+                                position: absolute;
+                                right:0%;
+                            }
+                            .check {
+                                position: absolute;
+                                visibility: collapse;
+                            }
                         }
                     }
                 }
@@ -162,4 +153,24 @@
 ::-webkit-scrollbar {
     width:0px;
     background: transparent;
+}
+
+.add-todo {
+    @include todo-style;
+    padding:1em;
+    form{
+        display:flex;
+        width:100%;
+        input{
+            border:none;
+            border-bottom: 2px solid $second-color;
+            width:100%;
+            padding:1em;
+        }
+        .add-icon{
+            color:$second-color;
+            @include icons;
+            padding:1em;
+        }
+    }
 }
