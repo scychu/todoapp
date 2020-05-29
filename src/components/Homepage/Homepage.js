@@ -67,7 +67,7 @@ class Homepage extends React.Component {
                                 <h6>Important</h6>
                             </div>
                             <div className="todo-lists">
-                                <TodoList todo={this.state.newLists} delLists={this.delLists}/>
+                                <TodoList todo={this.state.newLists} delLists={this.delLists} completed={this.state.completed}/>
                             </div>
                         </div>
                     </div>
