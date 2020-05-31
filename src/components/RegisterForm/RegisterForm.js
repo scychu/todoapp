@@ -11,25 +11,45 @@ class RegisterForm extends React.Component{
     state = {
         name : "",
         email: "",
-        password:""
+        password:"",
+        data:[]
     }
     getServer = async(nama,surel,sandi)=> {
-        await axios.post(`${baseUrl}`, {
-            name:nama,
-            email:surel,
-            password:sandi
-        })
-        .then(res => {
+        try {
+            const res = await axios.post(`${baseUrl}`, {
+                name:nama,
+                email:surel,
+                password:sandi
+            })
             this.setState({data:res.data})
             console.log(this.state.data)
+            console.log(this.state.data.status)
             alert(`Account has been register`)
-            if(res.status === "success"){
-                window.location.href="http://localhost:300/dashboard";
+            if(this.state.data.status === "success"){
+                window.location.href="http://localhost:3000/dashboard";
             }
-        })
-        .catch(
-            alert(`Account register failed`))
+            }catch (err) {
+                console.log(err)
+                alert(`Account register failed`)
+            }
+
         }
+        // await axios.post(`${baseUrl}`, {
+        //     name:nama,
+        //     email:surel,
+        //     password:sandi
+        // })
+        // .try(res => {
+        //     this.setState({data:res.data})
+        //     console.log(this.state.data)
+        //     alert(`Account has been register`)
+        //     if(res.status === "success"){
+        //         window.location.href="http://localhost:300/dashboard";
+        //     }
+        // })
+        // .catch(
+        //     alert(`Account register failed`))
+        // }
     
 
     // componentDidMount(){
