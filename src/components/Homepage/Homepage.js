@@ -4,6 +4,7 @@ import "../../style/sass/Dashboard.scss";
 import FormAdd from "./FormAdd";
 import TodoList from "./TodoList";
 import {FaUserCircle} from "react-icons/fa";
+import NoContent from "./NoContent";
 
 class Homepage extends React.Component {
     state={
@@ -67,7 +68,7 @@ class Homepage extends React.Component {
                                 <h6>Important</h6>
                             </div>
                             <div className="todo-lists">
-                                <TodoList todo={this.state.newLists} delLists={this.delLists}/>
+                                {!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} delLists={this.delLists}/>}
                             </div>
                         </div>
                     </div>

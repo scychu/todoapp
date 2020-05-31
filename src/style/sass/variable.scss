@@ -37,7 +37,9 @@ $important-color:#FEC112;
     width: 90%;
     box-sizing:border-box;
 }
-
+@mixin input-clicked {
+    outline:none;
+}
 @mixin medsos-icon {
     width:4em;
     height:4em;

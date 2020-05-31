@@ -101,9 +101,15 @@
                     overflow: scroll;
                     position: relative;
                     height:50vh;
+                    .no-content {
+                        margin:0 auto;
+                        p {
+                            font-size:1em;
+                            text-align: center;
+                        }
+                    }
                     .todo-list {
                         form{
-                        
                             @include todo-style;
                             height:3em;
                             padding:0 1em;
@@ -120,8 +126,9 @@
                             }
                             .important {
                                 position: absolute;
-                                color:$background-color;
+                                color:red;
                                 right:35%;
+                                background-color: blue;
                                 :hover {
                                     color:$important-color;
                                 }
@@ -167,10 +174,17 @@
             width:100%;
             padding:1em;
         }
+        input:focus{
+            @include input-clicked
+        }
         .add-icon{
             color:$second-color;
             @include icons;
             padding:1em;
         }
     }
+}
+
+.importanted {
+    background-color: #fff;
 }

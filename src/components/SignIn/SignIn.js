@@ -4,19 +4,7 @@ import {Link} from "react-router-dom";
 import "../../style/sass/RegisterForm.scss";
 
 class SignIn extends React.Component {
-    state = {
-        name : "stacey",
-        email: "scajaboleh@gmail.com",
-        password:"12345"
-    }
-    getData = async () => {
-        const res = await fetch("https://team-g-miniproject.herokuapp.com/api/v1/register")
-        const data = await res.json()
-        console.log(data)
-    }
-    componentDidMount(){
-        this.getData()
-    }
+    
 
     render(){
     return (
@@ -52,8 +40,8 @@ class SignIn extends React.Component {
                         value={this.state.password}
                         />
                     </div>
-                    {/* <Link to ="/dashboard" className="link" ><button>SIGN IN</button></Link> */}
-                    <button type="submit" onClick={this.getData}>SIGN IN</button>
+                    <Link to ="/dashboard" className="link" ><button>SIGN IN</button></Link>
+                    
                 </div>
             </div>
 
