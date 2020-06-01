@@ -1,12 +1,52 @@
 import React from "react";
 import {FaFacebookF, FaLinkedinIn, FaGooglePlusG} from "react-icons/fa"
 import {Link} from "react-router-dom";
+import axios from "axios";
 import "../../style/sass/RegisterForm.scss";
 
+const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/login"
 class SignIn extends React.Component {
+    state= {
+        email:"",
+        password:"",
+        data:[]
+    }
+    // componentDidMount(){
+    //     let token = localStorage.getItem('token')
+    //     if(token) this.props.history.replace('/')
+    // }
+    handleChange = e =>{
+        e.preventDefault();
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
     
+    getData = async()=> {
+        try{
+            const res = await axios.post(`${baseUrl}`, {
+                email:this.state.email,
+                password:this.state.password
+            })
+            this.setState({data:res.data})
+            // console.log(this.state.data)
+            alert(`Success login`)
+            // console.log(res.status)
+            if(res.status === 201){
+                window.location.href="http://localhost:3000/dashboard";
+            }
+        }
+        catch (err){
+            alert(err.response.data.message)
+        }
+    }
+    loginClick = e => {
+        e.preventDefault();
+        this.getData()
+    }
 
     render(){
+        // console.log(this.props)
     return (
         <div className="sign-in_wrapper">
             <div className="left-div">
@@ -30,18 +70,23 @@ class SignIn extends React.Component {
                     </div>
                     <p>or use your email for registation</p>
                     <div className="form">
-                        <input type="text"
-                        placeholder="Email"
-                        value={this.state.email}
-                        />
-                        <input
-                        type="password"
-                        placeholder="Password"
-                        value={this.state.password}
-                        />
+                        <form onSubmit={this.loginClick}>
+                            <input type="text"
+                            id="email"
+                            placeholder="Email"
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                            />
+                            <input
+                            type="password"
+                            id="password"
+                            placeholder="Password"
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            />
+                            <button onClick={this.loginClick}>SIGN IN</button>
+                        </form>
                     </div>
-                    <Link to ="/dashboard" className="link" ><button>SIGN IN</button></Link>
-                    
                 </div>
             </div>
 
@@ -50,5 +95,4 @@ class SignIn extends React.Component {
     )
     }
 }
-
 export default SignIn;

@@ -9,7 +9,6 @@ const FormRegister =({add})=> {
         e.persist()
         e.preventDefault();
         add(nama,surel,sandi)
-        console.log("submit")
     }
         return (
             <form onSubmit={submit}>

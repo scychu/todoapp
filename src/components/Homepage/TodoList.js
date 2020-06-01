@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaStar, FaTrash, FaPencilAlt} from "react-icons/fa";
+
 const TodoList = ({todo,delLists}) => {
     const important = ()=> {
         let senku = document.getElementById("senku");

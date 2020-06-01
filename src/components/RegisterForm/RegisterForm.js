@@ -2,7 +2,6 @@ import React from 'react'
 import "../../style/sass/RegisterForm.scss";
 import {FaFacebookF, FaLinkedinIn, FaGooglePlusG} from "react-icons/fa"
 import {Link} from "react-router-dom";
-// import { Redirect } from 'react-router';
 import axios from "axios";
 import FormRegister from './FormRegister';
 
@@ -22,52 +21,23 @@ class RegisterForm extends React.Component{
                 password:sandi
             })
             this.setState({data:res.data})
-            console.log(this.state.data)
-            console.log(this.state.data.status)
+            // console.log(this.state.data)
+            // console.log(this.state.data.status)
+            // console.log(this.state.data.data.token)
+            localStorage.setItem('token', this.state.data.data.token)
             alert(`Account has been register`)
             if(this.state.data.status === "success"){
                 window.location.href="http://localhost:3000/dashboard";
             }
-            }catch (err) {
-                console.log(err)
-                alert(`Account register failed`)
             }
-
+        catch (err) {
+            // console.log(err)
+            alert(err.response.data.message)
         }
-        // await axios.post(`${baseUrl}`, {
-        //     name:nama,
-        //     email:surel,
-        //     password:sandi
-        // })
-        // .try(res => {
-        //     this.setState({data:res.data})
-        //     console.log(this.state.data)
-        //     alert(`Account has been register`)
-        //     if(res.status === "success"){
-        //         window.location.href="http://localhost:300/dashboard";
-        //     }
-        // })
-        // .catch(
-        //     alert(`Account register failed`))
-        // }
-    
-
+    }
     // componentDidMount(){
     //     this.getServer()
     // }
-
-    // addUser = async () => {
-    //     const res = await axios.post(`${baseUrl}`, {
-    //         email:this.state.email,
-    //         password:this.state.password
-    //     })
-    //     this.setState({
-    //         name: [res.data, ...this.state.name],
-    //         email:"",
-    //         password:""
-    //     })
-    // }
-
     render () {
     return (
         <div className="register-wrapper">
@@ -91,10 +61,8 @@ class RegisterForm extends React.Component{
                     </div>
                     <p>or use your email for registation</p>
                     <div className="form">
-                        <FormRegister add={this.getServer}/>
+                        <FormRegister add={this.getServer} info={this.state}/>
                     </div>
-                    {/* <Link to ="/dashboard" className="link" ><button>SIGN UP</button></Link> */}
-                    {/* <button type="submit" onClick={this.getServer}>SIGN UP</button> */}
                 </div>
             </div>
         </div>

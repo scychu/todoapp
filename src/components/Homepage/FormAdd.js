@@ -8,8 +8,13 @@ const FormAdd = ({add})=> {
         setTitle(e.target.value)
     }
     const submit = e => {
+        if(!title) {
+            alert(`Please input your todo task!`)
+        } else {
         e.preventDefault();
         add(title)
+        setTitle("")
+        }
     }
     return (
         <div className="add-todo">

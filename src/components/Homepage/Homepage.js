@@ -6,7 +6,9 @@ import TodoList from "./TodoList";
 import {FaUserCircle} from "react-icons/fa";
 import NoContent from "./NoContent";
 
+
 class Homepage extends React.Component {
+
     state={
         newLists:[{
             id:0,
@@ -22,8 +24,6 @@ class Homepage extends React.Component {
             title:data,
             completed:false
         }
-        // console.log(len)
-        // console.log(newTodo)
         console.log(newTodo)
         this.setState({
             newLists:[...this.state.newLists, newTodo]
@@ -33,6 +33,9 @@ class Homepage extends React.Component {
         this.setState({
             newLists: this.state.newLists.filter(list => list.id !==id)
         })
+        // console.log(id)
+    }
+    editList = (id)=> {
         console.log(id)
     }
     render(){
@@ -48,7 +51,7 @@ class Homepage extends React.Component {
                         <div className="user-profile">
                             <FaUserCircle className="user-image"/>
                             <div className="edit-profile">
-                                <h3>User name</h3>  
+                                <h3>User Name</h3>  
                                 <Link to="/" className="link">Edit profile</Link>
                             </div>
                         </div>
