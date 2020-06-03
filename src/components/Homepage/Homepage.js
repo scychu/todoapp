@@ -118,7 +118,7 @@ class Homepage extends React.Component {
                                 <h6>Important</h6>
                             </div>
                             <div className="todo-lists">
-                                {this.state.isLoading ? <Spinner/>: (!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} delLists={this.delLists}/>)}
+                                {this.state.isLoading ? <Spinner/>: (!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} getAll={this.getAllTask} delLists={this.delLists}/>)}
                             </div>
                         </div>
                     </div>
