@@ -1,0 +1,91 @@
+@import "./variable.scss";
+
+.main-content{
+    margin-top:1em;
+    margin-left:1em;
+    box-sizing: border-box;
+    width:70%;
+    height:75vh;
+    .task-list {
+        .todo-title {
+            width:29vw;
+            display: flex;
+            justify-content:space-around;
+        }
+        .todo-lists{
+            overflow: scroll;
+            position: relative;
+            height:50vh;
+            .no-content {
+                margin:0 auto;
+                p {
+                    font-size:1em;
+                    text-align: center;
+                }
+            }
+            .todo-list {
+                form{
+                    @include todo-style;
+                    height:3em;
+                    padding:0 1em;
+                    margin-bottom: 1em;
+                    p {
+                        font-size: 1vw;
+                        padding-left:1em;
+                        width:15em;
+                        overflow:hidden
+                    }
+                    .icon{
+                    @include icons;
+                    
+                    }
+                    .important {
+                        position: absolute;
+                        right:35%;
+                        color:$important-color;
+                    }
+                    .not-important {
+                        position: absolute;
+                        right:35%;
+                        color:$background-color;
+                    }
+                    .edit {
+                        position: absolute;
+                        right:15%;
+                    }
+                    .delete {
+                        position: absolute;
+                        right:0%;
+                    }
+                    .check {
+                        position: absolute;
+                        visibility: collapse;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.add-todo {
+    @include todo-style;
+    padding:1em;
+    form{
+        display:flex;
+        width:100%;
+        input{
+            border:none;
+            border-bottom: 2px solid $second-color;
+            width:100%;
+            padding:1em;
+        }
+        input:focus{
+            @include input-clicked
+        }
+        .add-icon{
+            color:$second-color;
+            @include icons;
+            padding:1em;
+        }
+    }
+}

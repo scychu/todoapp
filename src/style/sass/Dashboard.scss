@@ -126,12 +126,13 @@
                             }
                             .important {
                                 position: absolute;
-                                color:red;
                                 right:35%;
-                                background-color: blue;
-                                // :hover {
-                                //     color:$important-color;
-                                // }
+                                color:$important-color;
+                            }
+                            .not-important {
+                                position: absolute;
+                                right:35%;
+                                color:$background-color;
                             }
                             .edit {
                                 position: absolute;
@@ -183,8 +184,4 @@
             padding:1em;
         }
     }
-}
-
-.meet {
-    background-color: #fff;
 }

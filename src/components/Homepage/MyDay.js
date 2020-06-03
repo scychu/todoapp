@@ -1,16 +1,78 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import "../../style/sass/RegisterForm.scss";
-import { FaPlus, FaStar, FaTrash, FaPencilAlt, FaUserCircle} from "react-icons/fa";
+import "../../style/sass/Dashboard.scss";
+import FormAdd from "./FormAdd";
+import TodoList from "./TodoList";
+import {FaUserCircle} from "react-icons/fa";
+import NoContent from "./NoContent";
+import axios from "axios";
+import NewTodoApp from "./NewTodoApp";
 
+
+const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/tasks/order"
 class MyDay extends React.Component {
+    state={
+        newLists:[]
+    }
+    addNewList = (name,important,completed) => {
+        const newTodo = {
+            name:name,
+            important:important,
+            completed:completed
+        }
+        console.log(newTodo)
+        this.setState({
+            newLists:[...this.state.newLists, newTodo]
+        })
+    }
+    updateTask = async (id) => {
+        
+    }
+    delLists = async (id) => {
+        const token = localStorage.getItem('token')
+        try{
+            const res = await axios.delete(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/(id)`, {
+                headers: {
+                    Authorization :token
+                }
+            })
+            this.setState({newLists: this.state.newLists.filter(list => list.id !==id)
+            })
+            console.log(id)
+        }
+        catch (err){
+            console.log(err)
+        }
+    }
+    logoutClick = e => {
+        localStorage.removeItem('token');
+        this.props.history.push("/")
+    }
+    
+    getAllTask = async () => {
+        const token = localStorage.getItem("token")
+        try{
+            const res = await axios.get(`${baseUrl}`, {
+                headers: {
+                    Authorization :token
+                }
+            })
+            this.setState({newLists: res.data.data.tasks})
+            console.log(res.data)
+        } catch(error){
+            console.log(error)
+        }
+    }
+    componentDidMount(){
+        this.getAllTask()
+    }
 
     render(){
         return(
-            <div className="my-day_wrapper">
+            <div className="homepage-wrapper">
                 <div className="header">
                     <div className="header-nav">
-                    <Link to ="/sign-in" className="link" ><button>SIGN OUT</button></Link>
+                    <Link to ="/sign-in" className="link" ><button onClick={()=> {this.logoutClick()}}>SIGN OUT</button></Link>
                     </div>
                 </div>
                 <div className="content">
@@ -18,7 +80,7 @@ class MyDay extends React.Component {
                         <div className="user-profile">
                             <FaUserCircle className="user-image"/>
                             <div className="edit-profile">
-                                <h3>User name</h3>  
+                                <h3>User Name</h3>  
                                 <Link to="/" className="link">Edit profile</Link>
                             </div>
                         </div>
@@ -30,110 +92,16 @@ class MyDay extends React.Component {
                             </ul>
                         </div>
                     </div>
+                    {/* <NewTodoApp/> */}
                     <div className="main-content">
-                        <div className="add-todo">
-                            <input
-                            type="text"
-                            placeholder="add task..."
-                            />
-                            <FaPlus className="add-icon icon"/>
-                        </div>
+                        <FormAdd add={this.addNewList} todo={this.state.newLists} />
                         <div className="task-list">
                             <div className="todo-title">
                                 <h6>Task</h6>
                                 <h6>Important</h6>
                             </div>
                             <div className="todo-lists">
-                                <div className="todo-list">
-                                    <input
-                                    className="checkbox"
-                                    type="checkbox"
-                                    />
-                                    <p>Reading a book</p>
-                                    <FaStar className="important icon" onClick={()=>console.log("important")}/>
-                                    <FaPencilAlt className="edit icon"/>
-                                    <FaTrash className="delete icon"/>
-                                </div>
-                                <div className="todo-list">
-                                    <input
-                                    className="checkbox"
-                                    type="checkbox"
-                                    />
-                                    <p>Reading a book</p>
-                                    <FaStar className="important icon" onClick={()=>console.log("important")}/>
-                                    <FaPencilAlt className="edit icon"/>
-                                    <FaTrash className="delete icon"/>
-                                </div>
-                                <div className="todo-list">
-                                    <input
-                                    className="checkbox"
-                                    type="checkbox"
-                                    />
-                                    <p>Reading a book</p>
-                                    <FaStar className="important icon" onClick={()=>console.log("important")}/>
-                                    <FaPencilAlt className="edit icon"/>
-                                    <FaTrash className="delete icon"/>
-                                </div>
-                                <div className="todo-list">
-                                    <input
-                                    className="checkbox"
-                                    type="checkbox"
-                                    />
-                                    <p>Reading a book</p>
-                                    <FaStar className="important icon" onClick={()=>console.log("important")}/>
-                                    <FaPencilAlt className="edit icon"/>
-                                    <FaTrash className="delete icon"/>
-                                </div>
-                                <div className="todo-list">
-                                    <input
-                                    className="checkbox"
-                                    type="checkbox"
-                                    />
-                                    <p>Reading a book</p>
-                                    <FaStar className="important icon" onClick={()=>console.log("important")}/>
-                                    <FaPencilAlt className="edit icon"/>
-                                    <FaTrash className="delete icon"/>
-                                </div>
-                                <div className="todo-list">
-                                    <input
-                                    className="checkbox"
-                                    type="checkbox"
-                                    />
-                                    <p>Reading a book</p>
-                                    <FaStar className="important icon" onClick={()=>console.log("important")}/>
-                                    <FaPencilAlt className="edit icon"/>
-                                    <FaTrash className="delete icon"/>
-                                </div>
-                                <div className="todo-list">
-                                    <input
-                                    className="checkbox"
-                                    type="checkbox"
-                                    />
-                                    <p>Reading a book</p>
-                                    <FaStar className="important icon" onClick={()=>console.log("important")}/>
-                                    <FaPencilAlt className="edit icon"/>
-                                    <FaTrash className="delete icon"/>
-                                </div>
-                                <div className="todo-list">
-                                    <input
-                                    className="checkbox"
-                                    type="checkbox"
-                                    />
-                                    <p>Reading a book</p>
-                                    <FaStar className="important icon" onClick={()=>console.log("important")}/>
-                                    <FaPencilAlt className="edit icon"/>
-                                    <FaTrash className="delete icon"/>
-                                </div>
-                                <div className="todo-list">
-                                    <input
-                                    className="checkbox"
-                                    type="checkbox"
-                                    />
-                                    <p>Reading a book</p>
-                                    <FaStar className="important icon" onClick={()=>console.log("important")}/>
-                                    <FaPencilAlt className="edit icon"/>
-                                    <FaTrash className="delete icon"/>
-                                </div>
+                                {!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} delLists={this.delLists}/>}
                             </div>
                         </div>
                     </div>

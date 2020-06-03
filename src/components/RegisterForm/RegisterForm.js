@@ -5,13 +5,14 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import FormRegister from './FormRegister';
 
-const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/register"
+const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/user/register"
 class RegisterForm extends React.Component{
     state = {
         name : "",
         email: "",
         password:"",
-        data:[]
+        data:[],
+        isLoading:false
     }
     getServer = async(nama,surel,sandi)=> {
         try {
@@ -20,19 +21,23 @@ class RegisterForm extends React.Component{
                 email:surel,
                 password:sandi
             })
+            this.setState({isLoading:true})
             this.setState({data:res.data})
-            // console.log(this.state.data)
-            // console.log(this.state.data.status)
-            // console.log(this.state.data.data.token)
+            console.log(this.state.data)
+            console.log(this.state.data.status)
+            console.log(this.state.data.data.token)
             localStorage.setItem('token', this.state.data.data.token)
             alert(`Account has been register`)
             if(this.state.data.status === "success"){
+                localStorage.setItem('token',res.data.data.token)
                 window.location.href="http://localhost:3000/dashboard";
+                // this.props.history.push('/dashboard')
             }
-            }
+        }
         catch (err) {
-            // console.log(err)
-            alert(err.response.data.message)
+            // alert(err.response.data.message)
+            console.log(err)
+            // this.setState({isLoading:false})
         }
     }
     // componentDidMount(){

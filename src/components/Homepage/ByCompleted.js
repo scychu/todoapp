@@ -9,43 +9,30 @@ import axios from "axios";
 import NewTodoApp from "./NewTodoApp";
 
 
-const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/tasks/order"
-class Homepage extends React.Component {
+const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/tasks/completed"
+class ByCompleted extends React.Component {
     state={
         newLists:[]
     }
-    addNewList = async (name,important,completed) => {
-        const token = localStorage.getItem('token')
-        try {
-            const res = await axios.delete(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/`, {
-                headers: {
-                    Authorization :token
-                }
-            })
-            const newTodo = {
-                name:name,
-                important:important,
-                completed:completed
-            }
-            console.log(res)
-            this.setState({newLists:[...this.state.newLists, newTodo]})
-            console.log(newTodo)
+    addNewList = (name,important,completed) => {
+        const newTodo = {
+            name:name,
+            important:important,
+            completed:completed
         }
-        catch (err){
-            console.log(err)
-        }
-        
+        console.log(newTodo)
+        this.setState({
+            newLists:[...this.state.newLists, newTodo]
+        })
     }
-    
     delLists = async (id) => {
         const token = localStorage.getItem('token')
         try{
-            const res = await axios.delete(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/${id}`, {
+            const res = await axios.delete(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/(id)`, {
                 headers: {
                     Authorization :token
                 }
             })
-            console.log(res)
             this.setState({newLists: this.state.newLists.filter(list => list.id !==id)
             })
             console.log(id)
@@ -121,4 +108,4 @@ class Homepage extends React.Component {
     }
 }
 
-export default Homepage;
+export default ByCompleted;

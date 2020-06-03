@@ -4,12 +4,13 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import "../../style/sass/RegisterForm.scss";
 
-const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/login"
+const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/user/login"
 class SignIn extends React.Component {
     state= {
         email:"",
         password:"",
-        data:[]
+        data:[],
+        isLoading:false
     }
     // componentDidMount(){
     //     let token = localStorage.getItem('token')
@@ -28,19 +29,25 @@ class SignIn extends React.Component {
                 email:this.state.email,
                 password:this.state.password
             })
+            this.setState({isLoading:true})
             this.setState({data:res.data})
             // console.log(this.state.data)
             alert(`Success login`)
             // console.log(res.status)
             if(res.status === 201){
-                window.location.href="http://localhost:3000/dashboard";
+                localStorage.setItem('token',res.data.data.token)
+                this.setState({isLoading:false, email:"", password:""})
+                // window.location.href="http://localhost:3000/dashboard";
+                this.props.history.push('/dashboard')
             }
         }
         catch (err){
             alert(err.response.data.message)
+            this.setState({isLoading:false})
         }
     }
     loginClick = e => {
+        this.setState({isLoading:true})
         e.preventDefault();
         this.getData()
     }
@@ -84,7 +91,7 @@ class SignIn extends React.Component {
                             value={this.state.password}
                             onChange={this.handleChange}
                             />
-                            <button onClick={this.loginClick}>SIGN IN</button>
+                            <button onClick={this.loginClick}>{this.state.isLoading ? "loading" : "SIGN IN"}</button>
                         </form>
                     </div>
                 </div>
