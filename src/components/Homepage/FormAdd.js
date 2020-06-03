@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { FaPlus } from "react-icons/fa";
 import "../../style/sass/Dashboard.scss";
 import axios from "axios";
@@ -28,7 +28,7 @@ class FormAdd extends React.Component {
             name:this.state.name,
         }
         try {
-            const res = await axios.post(`${baseUrl}`, newTodo,{
+            await axios.post(`${baseUrl}`, newTodo,{
                 headers:{
                     Authorization: token
                 }

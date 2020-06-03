@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { FaStar, FaTrash, FaPencilAlt} from "react-icons/fa";
 import "../../style/sass/variable.scss"
 import axios from "axios";

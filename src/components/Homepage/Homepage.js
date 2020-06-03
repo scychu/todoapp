@@ -6,7 +6,6 @@ import TodoList from "./TodoList";
 import {FaUserCircle} from "react-icons/fa";
 import NoContent from "./NoContent";
 import axios from "axios";
-import NewTodoApp from "./NewTodoApp";
 
 
 const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/tasks/order"
@@ -99,13 +98,12 @@ class Homepage extends React.Component {
                         </div>
                         <div className="nav-menu">
                             <ul>
-                                <li><Link to="/my-day" className="link myday-section" id="my-day">My Day</Link></li>
+                                <li><Link to="/my-day" className="link myday-section">My Day</Link></li>
                                 <li><Link to="/important" className="link important-section">Important</Link></li>
                                 <li><Link to="/completed" className="link completed-section">Completed</Link></li>
                             </ul>
                         </div>
                     </div>
-                    {/* <NewTodoApp/> */}
                     <div className="main-content">
                         <FormAdd todo={this.state.newLists} getAll={this.getAllTask}/>
                         <div className="task-list">
