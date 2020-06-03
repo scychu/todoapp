@@ -12,31 +12,29 @@ import NewTodoApp from "./NewTodoApp";
 const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/tasks/order"
 class Homepage extends React.Component {
     state={
-        newLists:[]
+        newLists:[],
+        username:""
     }
-    // addNewList = async (name,important,completed) => {
-    //     const token = localStorage.getItem('token')
-    //     try {
-    //         const res = await axios.delete(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/`, {
-    //             headers: {
-    //                 Authorization :token
-    //             }
-    //         })
-    //         const newTodo = {
-    //             name:name,
-    //             important:important,
-    //             completed:completed
-    //         }
-    //         console.log(res)
-    //         this.setState({newLists:[...this.state.newLists, newTodo]})
-    //         console.log(newTodo)
-    //     }
-    //     catch (err){
-    //         console.log(err)
-    //     }
-        
-    // }
-    
+    getUser = async () => {
+        const token = localStorage.getItem("token")
+        try{
+            const res = await axios.get("https://team-g-miniproject.herokuapp.com/api/v1/user", {
+                headers: {
+                    Authorization :token
+                }
+            })
+            // console.log(res)
+            // console.log(res.data)
+            // console.log(res.data.userData)
+            console.log(res.data.data.userData.Profile.name)
+
+            this.setState({username:res.data.data.userData.Profile.name})
+        }
+        catch (err){
+            alert(err)
+        }
+    }    
+
     getAllTask = async () => {
         const token = localStorage.getItem("token")
         try{
@@ -77,6 +75,7 @@ class Homepage extends React.Component {
     
     componentDidMount(){
         this.getAllTask()
+        this.getUser()
     }
 
     render(){
@@ -92,7 +91,7 @@ class Homepage extends React.Component {
                         <div className="user-profile">
                             <FaUserCircle className="user-image"/>
                             <div className="edit-profile">
-                                <h3>User Name</h3>  
+                                <h3>{this.state.username}</h3>  
                                 <Link to="/" className="link">Edit profile</Link>
                             </div>
                         </div>
