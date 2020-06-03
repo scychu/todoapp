@@ -14,29 +14,44 @@ class Homepage extends React.Component {
     state={
         newLists:[]
     }
-    addNewList = async (name,important,completed) => {
-        const token = localStorage.getItem('token')
-        try {
-            const res = await axios.delete(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/`, {
+    // addNewList = async (name,important,completed) => {
+    //     const token = localStorage.getItem('token')
+    //     try {
+    //         const res = await axios.delete(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/`, {
+    //             headers: {
+    //                 Authorization :token
+    //             }
+    //         })
+    //         const newTodo = {
+    //             name:name,
+    //             important:important,
+    //             completed:completed
+    //         }
+    //         console.log(res)
+    //         this.setState({newLists:[...this.state.newLists, newTodo]})
+    //         console.log(newTodo)
+    //     }
+    //     catch (err){
+    //         console.log(err)
+    //     }
+        
+    // }
+    
+    getAllTask = async () => {
+        const token = localStorage.getItem("token")
+        try{
+            const res = await axios.get(`${baseUrl}`, {
                 headers: {
                     Authorization :token
                 }
             })
-            const newTodo = {
-                name:name,
-                important:important,
-                completed:completed
-            }
-            console.log(res)
-            this.setState({newLists:[...this.state.newLists, newTodo]})
-            console.log(newTodo)
+            this.setState({newLists: res.data.data.tasks})
+            console.log(res.data)
+        } catch(error){
+            console.log(error)
         }
-        catch (err){
-            console.log(err)
-        }
-        
     }
-    
+
     delLists = async (id) => {
         const token = localStorage.getItem('token')
         try{
@@ -54,25 +69,12 @@ class Homepage extends React.Component {
             console.log(err)
         }
     }
+    
     logoutClick = e => {
         localStorage.removeItem('token');
-        this.props.history.push("/")
+        this.props.history.push("/sign-in")
     }
     
-    getAllTask = async () => {
-        const token = localStorage.getItem("token")
-        try{
-            const res = await axios.get(`${baseUrl}`, {
-                headers: {
-                    Authorization :token
-                }
-            })
-            this.setState({newLists: res.data.data.tasks})
-            console.log(res.data)
-        } catch(error){
-            console.log(error)
-        }
-    }
     componentDidMount(){
         this.getAllTask()
     }
@@ -82,7 +84,7 @@ class Homepage extends React.Component {
             <div className="homepage-wrapper">
                 <div className="header">
                     <div className="header-nav">
-                    <Link to ="/sign-in" className="link" ><button onClick={()=> {this.logoutClick()}}>SIGN OUT</button></Link>
+                    <button onClick={()=> {this.logoutClick()}}>SIGN OUT</button>
                     </div>
                 </div>
                 <div className="content">
@@ -104,7 +106,7 @@ class Homepage extends React.Component {
                     </div>
                     {/* <NewTodoApp/> */}
                     <div className="main-content">
-                        <FormAdd add={this.addNewList} todo={this.state.newLists} />
+                        <FormAdd add={this.addNewList} todo={this.state.newLists} getAll={this.getAllTask}/>
                         <div className="task-list">
                             <div className="todo-title">
                                 <h6>Task</h6>

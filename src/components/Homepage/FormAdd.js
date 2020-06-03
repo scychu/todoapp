@@ -4,58 +4,51 @@ import "../../style/sass/Dashboard.scss";
 import axios from "axios";
 
 const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/tasks"
-const FormAdd = ({add,todo})=> {
-    const [name,setName] = useState("")
-    const [completed,setCompleted] = useState(false)
-    const [important, setImportant] = useState(false)
-    
-    const change = e => {
-        setName(e.target.value)
+class FormAdd extends React.Component {
+    state = {
+        name: "",
+        completed:"",
+        importance:"",
+        isLoading:false
     }
-    
-    const submit = e => {
-        if(!name) {
+    change = e => {
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+    }
+    submit = async (e) => {
+        this.setState({isLoading:true})
+        let token = localStorage.getItem('token')
+        if(!this.state.name) {
             alert(`Please input your todo task!`)
         } else {
         e.preventDefault();
-        // add(name,completed,important)
-        setName("")
-        createTask()
         }
-    }
-
-    const createTask = async () => {
-        const token = localStorage.getItem('token')
-        console.log(token)
+        const newTodo = {
+            name:this.state.name,
+        }
         try {
-            const res = await axios.post(`${baseUrl}`,{
+            const res = await axios.post(`${baseUrl}`, newTodo,{
                 headers:{
-                    Authorization :token,
-                    'Content-Type':"application/json"
-                },
-                body:{
-                    name: "coding",
-                    description: "work on daily task",
-                    due_date: "2020-10-06"
+                    Authorization: token
                 }
             })
-            console.log(res.data)
-            this.setState({todo: res.data.data.tasks})
+            this.props.getAll()
+            this.setState({name:""})
         }
         catch (err){
-            console.log(err.message)
+            alert(err)
         }
     }
-
-
-    return (
-        <div className="add-todo">
-            <form onSubmit={submit}>
-                <input type="text" value={name} onChange={change} required/>
-                <FaPlus className="add-icon icon" onClick={submit}/>
-            </form>
-        </div>
-        )
+    render(){
+        return (
+            <div className="add-todo">
+                <form onSubmit={this.submit}>
+                    <input type="text" name="name" value={this.state.name} onChange={this.change} required/>
+                    <FaPlus className="add-icon icon" onClick={this.submit}/>
+                </form>
+            </div>
+            )
+    }
 }
-
 export default FormAdd;
