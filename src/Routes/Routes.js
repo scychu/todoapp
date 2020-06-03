@@ -12,9 +12,7 @@ import ByCompleted from "../components/Homepage/ByCompleted";
 const Routes = ()=> {
     return(
         <Switch>
-            <Route path="/" exact>
-                <RegisterForm/>
-            </Route>
+            <Route path="/" component={RegisterForm} exact/>
             <Route path="/sign-in" component={SignIn} exact/>
             <Route path="/dashboard" component={Homepage} exact/>
             <Route path="/my-day" component={MyDay} exact/>

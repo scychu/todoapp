@@ -30,8 +30,8 @@ class RegisterForm extends React.Component{
             alert(`Account has been register`)
             if(this.state.data.status === "success"){
                 localStorage.setItem('token',res.data.data.token)
-                window.location.href="http://localhost:3000/dashboard";
-                // this.props.history.push('/dashboard')
+                // window.location.href="http://localhost:3000/dashboard";
+                this.props.history.push('/dashboard')
             }
         }
         catch (err) {

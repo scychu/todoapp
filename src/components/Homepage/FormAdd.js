@@ -16,7 +16,7 @@ class FormAdd extends React.Component {
             [e.target.name] : e.target.value
         })
     }
-    submit = async (e) => {
+    addTask = async (e) => {
         this.setState({isLoading:true})
         let token = localStorage.getItem('token')
         if(!this.state.name) {
@@ -33,19 +33,19 @@ class FormAdd extends React.Component {
                     Authorization: token
                 }
             })
-            this.props.getAll()
             this.setState({name:""})
+            this.props.getAll()
         }
         catch (err){
-            alert(err)
+            console.log(err)
         }
     }
     render(){
         return (
             <div className="add-todo">
-                <form onSubmit={this.submit}>
+                <form onSubmit={this.addTask}>
                     <input type="text" name="name" value={this.state.name} onChange={this.change} required/>
-                    <FaPlus className="add-icon icon" onClick={this.submit}/>
+                    <FaPlus className="add-icon icon" onClick={this.addTask}/>
                 </form>
             </div>
             )

@@ -13,7 +13,8 @@ const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/tasks/order"
 class Homepage extends React.Component {
     state={
         newLists:[],
-        username:""
+        username:"",
+        image:""
     }
     getUser = async () => {
         const token = localStorage.getItem("token")
@@ -26,9 +27,10 @@ class Homepage extends React.Component {
             // console.log(res)
             // console.log(res.data)
             // console.log(res.data.userData)
-            console.log(res.data.data.userData.Profile.name)
+            // console.log(res.data.data.userData.Profile.name)
 
             this.setState({username:res.data.data.userData.Profile.name})
+            // this.setState({image: res.data.data.userData})
         }
         catch (err){
             alert(err)
@@ -46,7 +48,7 @@ class Homepage extends React.Component {
             this.setState({newLists: res.data.data.tasks})
             console.log(res.data)
         } catch(error){
-            console.log(error)
+            alert(error)
         }
     }
 
@@ -59,8 +61,8 @@ class Homepage extends React.Component {
                 }
             })
             console.log(res)
-            this.setState({newLists: this.state.newLists.filter(list => list.id !==id)
-            })
+            this.getAllTask()
+            this.setState({newLists: this.state.newLists.filter(list => list.id !==id)})
             console.log(id)
         }
         catch (err){
@@ -89,7 +91,7 @@ class Homepage extends React.Component {
                 <div className="content">
                     <div className="left-nav">
                         <div className="user-profile">
-                            <FaUserCircle className="user-image"/>
+                            {!this.state.image ?<FaUserCircle className="user-image"/>: this.state.image}
                             <div className="edit-profile">
                                 <h3>{this.state.username}</h3>  
                                 <Link to="/" className="link">Edit profile</Link>
@@ -105,7 +107,7 @@ class Homepage extends React.Component {
                     </div>
                     {/* <NewTodoApp/> */}
                     <div className="main-content">
-                        <FormAdd add={this.addNewList} todo={this.state.newLists} getAll={this.getAllTask}/>
+                        <FormAdd todo={this.state.newLists} getAll={this.getAllTask}/>
                         <div className="task-list">
                             <div className="todo-title">
                                 <h6>Task</h6>

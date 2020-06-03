@@ -12,10 +12,6 @@ class SignIn extends React.Component {
         data:[],
         isLoading:false
     }
-    // componentDidMount(){
-    //     let token = localStorage.getItem('token')
-    //     if(token) this.props.history.replace('/')
-    // }
     handleChange = e =>{
         e.preventDefault();
         this.setState({
