@@ -23,9 +23,9 @@ class RegisterForm extends React.Component{
             })
             this.setState({isLoading:true})
             this.setState({data:res.data})
-            console.log(this.state.data)
-            console.log(this.state.data.status)
-            console.log(this.state.data.data.token)
+            // console.log(this.state.data)
+            // console.log(this.state.data.status)
+            // console.log(this.state.data.data.token)
             localStorage.setItem('token', this.state.data.data.token)
             alert(`Account has been register`)
             if(this.state.data.status === "success"){

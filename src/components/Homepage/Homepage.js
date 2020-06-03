@@ -6,14 +6,15 @@ import TodoList from "./TodoList";
 import {FaUserCircle} from "react-icons/fa";
 import NoContent from "./NoContent";
 import axios from "axios";
-
+import Spinner from "../helper/Spinner";
 
 const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/tasks/order"
 class Homepage extends React.Component {
     state={
         newLists:[],
         username:"",
-        image:""
+        image:"",
+        isLoading:false
     }
     getUser = async () => {
         const token = localStorage.getItem("token")
@@ -27,7 +28,6 @@ class Homepage extends React.Component {
             // console.log(res.data)
             // console.log(res.data.userData)
             // console.log(res.data.data.userData.Profile.name)
-
             this.setState({username:res.data.data.userData.Profile.name})
             // this.setState({image: res.data.data.userData})
         }
@@ -37,6 +37,7 @@ class Homepage extends React.Component {
     }    
 
     getAllTask = async () => {
+        this.setState({isLoading:true})
         const token = localStorage.getItem("token")
         try{
             const res = await axios.get(`${baseUrl}`, {
@@ -45,13 +46,16 @@ class Homepage extends React.Component {
                 }
             })
             this.setState({newLists: res.data.data.tasks})
+            this.setState({isLoading:false})
             console.log(res.data)
         } catch(error){
             alert(error)
+            this.setState({isLoading:false})
         }
     }
 
     delLists = async (id) => {
+        this.setState({isLoading:true})
         const token = localStorage.getItem('token')
         try{
             const res = await axios.delete(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/${id}`, {
@@ -62,10 +66,12 @@ class Homepage extends React.Component {
             console.log(res)
             this.getAllTask()
             this.setState({newLists: this.state.newLists.filter(list => list.id !==id)})
+            this.setState({isLoading:false})
             console.log(id)
         }
         catch (err){
             console.log(err)
+            this.setState({isLoading:false})
         }
     }
     
@@ -84,7 +90,7 @@ class Homepage extends React.Component {
             <div className="homepage-wrapper">
                 <div className="header">
                     <div className="header-nav">
-                    <button onClick={()=> {this.logoutClick()}}>SIGN OUT</button>
+                        <button onClick={()=> {this.logoutClick()}}>{this.state.isLoading ? "loading..." : "SIGN OUT" }</button>
                     </div>
                 </div>
                 <div className="content">
@@ -112,7 +118,9 @@ class Homepage extends React.Component {
                                 <h6>Important</h6>
                             </div>
                             <div className="todo-lists">
-                                {!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} delLists={this.delLists}/>}
+                            {/* !this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} delLists={this.delLists}/> */}
+                                {this.state.isLoading ? <Spinner/>: (!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} delLists={this.delLists}/>)}
+                                {/* <Spinner/> */}
                             </div>
                         </div>
                     </div>
