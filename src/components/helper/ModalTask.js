@@ -1,6 +1,7 @@
 import React from "react";
 
-class ModalTask extends REact.Component{
+class ModalTask extends React.Component {
+    
     render(){
     return(
         <div clasName="edit-task">

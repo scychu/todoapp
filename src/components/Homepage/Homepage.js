@@ -53,7 +53,21 @@ class Homepage extends React.Component {
             this.setState({isLoading:false})
         }
     }
-
+    getMoreData =  async (id)=>{
+        this.setState({isLoading:true})
+        const token = localStorage.getItem('token')
+        try {
+            const res = await axios.get(`${baseUrl}?offset=10`, {
+                headers: {
+                    Authorization:token
+                }
+            })
+            console.log(res)
+            this.setState({isLoading:false})
+        }catch (err){
+            console.log(err)
+        }
+    }
     delLists = async (id) => {
         this.setState({isLoading:true})
         const token = localStorage.getItem('token')
@@ -118,7 +132,7 @@ class Homepage extends React.Component {
                                 <h6>Important</h6>
                             </div>
                             <div className="todo-lists">
-                                {this.state.isLoading ? <Spinner/>: (!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} getAll={this.getAllTask} delLists={this.delLists}/>)}
+                                {this.state.isLoading ? <Spinner/>: (!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} getAll={this.getAllTask} delLists={this.delLists} more={this.getMoreData}/>)}
                             </div>
                         </div>
                     </div>

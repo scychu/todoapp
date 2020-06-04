@@ -263,6 +263,15 @@
     }
 }
 
+.complete {
+    text-decoration: line-through black;
+    color:$second-color
+}
+
+.not-completed {
+    color:$background-color;
+}
+
 .completed {
-    text-decoration: line-through;
+    color:$primary-color;
 }
