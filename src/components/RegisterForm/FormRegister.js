@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const FormRegister =({add})=> {
+const FormRegister =({add,info})=> {
     const [nama,setNama] = useState("")
     const [surel, setSurel] = useState("")
     const [sandi, setSandi] = useState("")
@@ -29,6 +29,7 @@ const FormRegister =({add})=> {
                 onChange={e=> setSandi(e.target.value)}
                 />
                 <button type="submit" onClick={submit}>SIGN UP</button>
+                {/* <button onClick={submit}>{isLoading ? "loading..." : "SIGN UP" }</button> */}
             </form>
         )
 }

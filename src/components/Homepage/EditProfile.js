@@ -8,15 +8,16 @@ import NoContent from "./NoContent";
 import axios from "axios";
 import Spinner from "../helper/Spinner";
 
-const baseUrl = "https://team-g-miniproject.herokuapp.com/api/v1/tasks/order"
-class Homepage extends React.Component {
+class EditProfile extends React.Component {
     state={
         newLists:[],
         username:"",
+        id:"",
         image:"",
-        isLoading:false
+        isLoading:false,
+        data:[]
     }
-    getUser = async () => {
+    getUserProfile = async () => {
         const token = localStorage.getItem("token")
         try{
             const res = await axios.get("https://team-g-miniproject.herokuapp.com/api/v1/user", {
@@ -28,61 +29,48 @@ class Homepage extends React.Component {
             // console.log(res.data)
             // console.log(res.data.userData)
             // console.log(res.data.data.userData.Profile.name)
+            // console.log(res.data.data.userData.Profile.id)
             this.setState({username:res.data.data.userData.Profile.name})
+            this.setState({id:res.data.data.userData.Profile.id})
             // this.setState({image: res.data.data.userData})
         }
         catch (err){
             alert(err)
         }
     }    
-
-    getAllTask = async () => {
-        this.setState({isLoading:true})
+    updateProfile = async (id)=> {
         const token = localStorage.getItem("token")
-        try{
-            const res = await axios.get(`${baseUrl}`, {
-                headers: {
-                    Authorization :token
-                }
-            })
-            this.setState({newLists: res.data.data.tasks})
-            this.setState({isLoading:false})
-            console.log(res.data)
-        } catch(error){
-            alert(error)
-            this.setState({isLoading:false})
+        const changes = {
+            name: "indah",
+            image:""
         }
-    }
-
-    delLists = async (id) => {
-        this.setState({isLoading:true})
-        const token = localStorage.getItem('token')
         try{
-            const res = await axios.delete(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/${id}`, {
+            const res = await axios.put(`https://team-g-miniproject.herokuapp.com/api/v1/user/${id}`, changes, {
                 headers: {
                     Authorization :token
                 }
             })
-            console.log(res)
-            this.getAllTask()
-            this.setState({newLists: this.state.newLists.filter(list => list.id !==id)})
-            this.setState({isLoading:false})
-            console.log(id)
+            this.setState({data:res.data})
+            // console.log(this.state.data)
+            // console.log(res.data)
+            // console.log(res.data.userData)
+            // console.log(res.data.data.userData.Profile.name)
+            this.getUserProfile()
+            this.setState({username:res.data.data.userData.Profile.name})
+            this.setState({image: res.data.data.userData})
         }
         catch (err){
-            console.log(err)
-            this.setState({isLoading:false})
+            alert(err)
         }
     }
-    
+
     logoutClick = e => {
         localStorage.removeItem('token');
         this.props.history.push("/sign-in")
     }
     
     componentDidMount(){
-        this.getAllTask()
-        this.getUser()
+        this.getUserProfile()
     }
 
     render(){
@@ -93,13 +81,22 @@ class Homepage extends React.Component {
                         <button onClick={()=> {this.logoutClick()}}>{this.state.isLoading ? "loading..." : "SIGN OUT" }</button>
                     </div>
                 </div>
-                <div className="content">
+                <div className="edit-profile_section">
+                    <div className="edit">
+                        <div className="user-profile">
+                            {!this.state.image ?<FaUserCircle className="user-image"/>: this.state.image}
+                            <h3>{this.state.username}</h3>  
+                        </div>
+                        <button onClick={()=> {this.updateProfile(this.state.id)}}>Save changes</button>
+                    </div>
+                </div>
+                {/* <div className="content">
                     <div className="left-nav">
                         <div className="user-profile">
                             {!this.state.image ?<FaUserCircle className="user-image"/>: this.state.image}
                             <div className="edit-profile">
                                 <h3>{this.state.username}</h3>  
-                                <Link to="/edit-profile" className="link">Edit profile</Link>
+                                <Link to="/" className="link">Edit profile</Link>
                             </div>
                         </div>
                         <div className="nav-menu">
@@ -122,10 +119,10 @@ class Homepage extends React.Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         )
     }
 }
 
-export default Homepage;
+export default EditProfile;

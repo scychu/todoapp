@@ -196,4 +196,21 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
+}
+
+.edit-profile_section {
+    height:75vh;
+    display:flex;
+    justify-content: center;
+    .edit{
+        text-align: center;
+        .user-profile{
+            margin:1em;
+            text-align: center;
+            .user-image {
+                width:5em;
+                height:5em;
+            }
+        }
+    }
+}

@@ -35,14 +35,12 @@ class RegisterForm extends React.Component{
             }
         }
         catch (err) {
-            // alert(err.response.data.message)
-            console.log(err)
-            // this.setState({isLoading:false})
+            alert(err.response.data.message)
+            this.setState({isLoading:false})
+            this.setState({name:"", email:"", password:""})
         }
     }
-    // componentDidMount(){
-    //     this.getServer()
-    // }
+    
     render () {
     return (
         <div className="register-wrapper">
