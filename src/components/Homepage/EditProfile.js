@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import "../../style/sass/Dashboard.scss";
 import FormAdd from "./FormAdd";
 import TodoList from "./TodoList";
-import {FaUserCircle} from "react-icons/fa";
+import {FaUserCircle, FaArrowLeft, FaPencilAlt} from "react-icons/fa";
 import NoContent from "./NoContent";
 import axios from "axios";
 import Spinner from "../helper/Spinner";
@@ -78,6 +78,7 @@ class EditProfile extends React.Component {
             <div className="homepage-wrapper">
                 <div className="header">
                     <div className="header-nav">
+                        <Link to="/dashboard"><FaArrowLeft className="back-btn"/></Link>
                         <button onClick={()=> {this.logoutClick()}}>{this.state.isLoading ? "loading..." : "SIGN OUT" }</button>
                     </div>
                 </div>
@@ -86,40 +87,11 @@ class EditProfile extends React.Component {
                         <div className="user-profile">
                             {!this.state.image ?<FaUserCircle className="user-image"/>: this.state.image}
                             <h3>{this.state.username}</h3>  
+                            <FaPencilAlt className="pen-edit"/>
                         </div>
                         <button onClick={()=> {this.updateProfile(this.state.id)}}>Save changes</button>
                     </div>
                 </div>
-                {/* <div className="content">
-                    <div className="left-nav">
-                        <div className="user-profile">
-                            {!this.state.image ?<FaUserCircle className="user-image"/>: this.state.image}
-                            <div className="edit-profile">
-                                <h3>{this.state.username}</h3>  
-                                <Link to="/" className="link">Edit profile</Link>
-                            </div>
-                        </div>
-                        <div className="nav-menu">
-                            <ul>
-                                <li><Link to="/my-day" className="link myday-section">My Day</Link></li>
-                                <li><Link to="/important" className="link important-section">Important</Link></li>
-                                <li><Link to="/completed" className="link completed-section">Completed</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="main-content">
-                        <FormAdd todo={this.state.newLists} getAll={this.getAllTask}/>
-                        <div className="task-list">
-                            <div className="todo-title">
-                                <h6>Task</h6>
-                                <h6>Important</h6>
-                            </div>
-                            <div className="todo-lists">
-                                {this.state.isLoading ? <Spinner/>: (!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} getAll={this.getAllTask} delLists={this.delLists}/>)}
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
             </div>
         )
     }
