@@ -37,31 +37,6 @@ class EditProfile extends React.Component {
             alert(err)
         }
     }    
-    updateProfile = async (id)=> {
-        const token = localStorage.getItem("token")
-        const changes = {
-            name: "indahnya langit biru",
-            image:""
-        }
-        try{
-            const res = await axios.put(`https://team-g-miniproject.herokuapp.com/api/v1/user/${id}`, changes, {
-                headers: {
-                    Authorization :token
-                }
-            })
-            this.setState({data:res.data})
-            // console.log(this.state.data)
-            // console.log(res.data)
-            // console.log(res.data.userData)
-            // console.log(res.data.data.userData.Profile.name)
-            this.getUserProfile()
-            this.setState({username:res.data.data.userData.Profile.name})
-            this.setState({image: res.data.data.userData})
-        }
-        catch (err){
-            alert(err)
-        }
-    }
     editName = e => {
         this.setState({isModalOpen:true});
     }
@@ -71,6 +46,7 @@ class EditProfile extends React.Component {
     }
     backBtn = e => {
         this.setState({isModalOpen:false})
+        this.getUserProfile()
     }
     
     componentDidMount(){
@@ -79,7 +55,7 @@ class EditProfile extends React.Component {
 
     render(){
         if(this.state.isModalOpen){
-            let modal = <ModalInput back={this.backBtn}/>
+            let modal = <ModalInput back={this.backBtn} getUser={this.getUserProfile}/>
             return modal
         }
         return(
@@ -96,11 +72,11 @@ class EditProfile extends React.Component {
                             <h1>Edit your profile</h1>
                             {!this.state.image ?<FaUserCircle className="user-image"/>: this.state.image}
                             <FaPencilAlt className="image-edit"/>
-                            <h3>{this.state.username}</h3>  
-                            <FaPencilAlt className="pen-edit" onClick={()=>this.editName()}/>
-                            <button onClick={()=> {this.updateProfile(this.state.id)}}>Save changes</button>
+                            <div className="edit-inner">
+                                <h3>{this.state.username}</h3>  
+                            </div>
+                            <button onClick={()=>{this.editName()}}>Edit Profile</button>
                         </div>
-                            <button onClick={()=>{this.editName()}}>cek</button>
                     </div>
                 </div>
             </div>

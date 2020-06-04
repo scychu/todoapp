@@ -90,7 +90,7 @@ class Homepage extends React.Component {
             <div className="homepage-wrapper">
                 <div className="header">
                     <div className="header-nav">
-                        <button onClick={()=> {this.logoutClick()}}>{this.state.isLoading ? "loading..." : "SIGN OUT" }</button>
+                        <button onClick={()=> {this.logoutClick()}}>SIGN OUT</button>
                     </div>
                 </div>
                 <div className="content">

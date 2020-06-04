@@ -218,6 +218,13 @@
             margin:1em;
             text-align: center;
             position: relative;
+            .edit-inner {
+                position: relative;
+                button {
+                    position: absolute;
+                    left:37%;
+                }
+            }
             .user-image {
                 width:5em;
                 height:5em;
@@ -235,16 +242,9 @@
                 color:red;
                 background: rgba(29, 106, 154, 0.72);
             }
-            .pen-edit {
-                position: absolute;
-                bottom:3%;
-                right:30%;
-            }
+            
         }
-        button {
-            position: absolute;
-            left:37%;
-        }
+        
     }
 }
 .modal-wrapper{
@@ -261,4 +261,8 @@
     .modal{
       text-align:center;
     }
+}
+
+.completed {
+    text-decoration: line-through;
 }

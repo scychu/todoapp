@@ -7,21 +7,50 @@ class TodoList extends React.Component {
     state ={
         importance:"",
         completed:"",
-        isLoading:false
+        isLoading:false,
+        isChecked:false
     }
 
-    // checkBox = e => {
-    //     if(document.getElementById('box').checked){
-    //         console.log("important")
-    //     } else {
-    //         console.log("unimportant")
-    //     }
-    // }
-    isOrNot = () =>{
-        if(this.state.importance){
-            return this.setState({importance:false})
-        } else {
-            return this.setState({importance:true})
+    checkBox = async(id,importance,completed) => {
+        this.setState({isLoading:true})
+        const token = localStorage.getItem('token')
+        const complete = {
+            completed:"true"
+        }
+        const incomplete = {
+            completed:"false"
+        }
+        try{
+            const res = await axios.put(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/${id}`,completed ? complete : incomplete, {
+                headers: {
+                    Authorization :token,
+                }
+            })
+            console.log(res)
+            this.props.getAll()
+            this.setState({isLoading:false})
+        }
+        catch (err){
+            console.log(err)
+            this.setState({isLoading:false})
+        }
+        
+        // if(document.getElementById('box').checked){
+        //     console.log("finished")
+        //     return check = "completed:true"
+        // } else {
+        //     this.setState({completed:false})
+        //     console.log("unfinished")
+        // }
+        // console.log(check)
+    }
+    checking = (completed) => {
+        if(document.getElementById('box').checked && completed) {
+            console.log("completed")
+        }else if (document.getElementById('box'.checked) || completed){
+            this.setState({completed:true})
+            // console.log("tes")
+            console.log(this.state.completed)
         }
     }
     updateImportant = async(id,importance,completed) => {
@@ -47,40 +76,13 @@ class TodoList extends React.Component {
             console.log(err)
             this.setState({isLoading:false})
         }
-   }
-   updateCompleted = async(id,importance,completed) => {
-    this.setState({isLoading:true})
-    const token = localStorage.getItem('token')
-    const checked = {
-        completed : true
     }
-    // const checking = e => {
-    //     if(document.getElementById('box').checked){
-    //         console.log("important")
-    //     } else {
-    //         console.log("unimportant")
-    //     }
-    // }
-    try{
-        const res = await axios.put(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/${id}`,checked, {
-            headers: {
-                Authorization :token,
-            }
-        })
-        console.log(res)
-        this.props.getAll()
-        this.setState({isLoading:false})
-    }
-    catch (err){
-        console.log(err)
-        this.setState({isLoading:false})
-    }
-}   
+
     result = this.props.todo.map(item=>
         <div key={item.id} className="todo-list">
             <form>
-                <input id="box" className="checkbox" onClick={this.checkBox}type="checkbox" required/>
-                <p className={item.completed ? "merah" : "biru"}>{item.name}</p>
+                <input id="box" type="checkbox" checked={this.isChecked} onClick={()=>{this.checking(item.completed)}}/>
+                <p className={item.completed ? "completed": "not-complete"}>{item.name}</p>
                 <FaStar className={item.importance ? "important icon" : "not-important icon"} onClick={()=> {this.updateImportant(item.id,item.importance,item.completed)}}/>
                 <FaPencilAlt className="edit icon" onClick={()=>{
             console.log(`id:${item.id},important :${item.importance},completed: ${item.completed}`)}}/>
@@ -89,6 +91,7 @@ class TodoList extends React.Component {
         </div>
         )
     render(){
+        
         return(
             <div>
                 {this.result}
@@ -97,69 +100,4 @@ class TodoList extends React.Component {
         )
     }
 }
-
-// const TodoList = ({todo,delLists}) => {
-//    const [completed,setCompleted] = useState(false)
-//    const [importance, setImportance] = useState(false)
-   
-//    const checkImportant = async(id,importance,completed) => {
-//         const token = localStorage.getItem('token')
-//         console.log(token)
-//         try{
-//             const res = await axios.put(`https://team-g-miniproject.herokuapp.com/api/v1/tasks/${id}`, {
-//                 headers: {
-//                     Authorization :token
-//                 }
-//             })
-//             console.log(res)
-//             // this.setState({newLists: this.state.newLists.filter(list => list.id !==id)
-//             setImportance(true)
-            
-//             console.log(id)
-//         }
-//         catch (err){
-//             console.log(err)
-//         }
-//        console.log(id)
-//        console.log(importance)
-//        console.log(completed)
-//     if(important){
-//         setImportant(false)
-//         console.log("unimportant")
-//     } else {
-//         setImportant(true)
-//         console.log("important")
-//     }
-//    }
-//    const checkBox = () => {
-//         if(document.getElementById("box").checked){
-//            setCompleted(true)
-//            console.log("checked")
-//         } else {
-//            console.log("not checked")
-//         }
-//     }
-//     const checkId =id => {
-//         console.log(id)
-//     }
-
-//     const result = todo.map(item=>
-//         <div key={item.id} className="todo-list">
-//             <form>
-//                 <input id="box" className="checkbox" onClick={checkBox}type="checkbox" required/>
-//                 <p className={item.completed ? "merah" : "biru"}>{item.name}</p>
-//                 <FaStar className={importance ? "important icon" : "not-important icon"} onClick={()=> {checkImportant(item.id,item.importance,item.completed)}}/>
-//                 <FaPencilAlt className="edit icon" onClick={()=>{
-//             console.log(`id:${item.id},important :${item.importance},completed: ${item.completed}`)}}/>
-//                 <FaTrash className="delete icon" onClick={()=>{delLists(item.id)}}/>
-//             </form>
-//         </div>
-//         )
-//     return (
-//         <div>
-//             {result}
-//         </div>
-//     )
-// }
-
 export default TodoList;
