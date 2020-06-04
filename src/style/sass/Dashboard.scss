@@ -212,6 +212,8 @@
     justify-content: center;
     .edit{
         text-align: center;
+        width:50%;
+        background-color: $background-color;
         .user-profile{
             margin:1em;
             text-align: center;
@@ -220,11 +222,43 @@
                 width:5em;
                 height:5em;
             }
+            .user-image:hover .image-edit{
+                visibility: visible;
+                opacity: 1;
+            }
+            .image-edit{
+                position: absolute;
+                top:20%;
+                left:50%;
+                visibility: hidden;
+                transition: opacity .2s, visibility .2s;
+                color:red;
+                background: rgba(29, 106, 154, 0.72);
+            }
             .pen-edit {
                 position: absolute;
                 bottom:3%;
-                right:-15%;
+                right:30%;
             }
         }
+        button {
+            position: absolute;
+            left:37%;
+        }
+    }
+}
+.modal-wrapper{
+    margin:2% auto;
+    box-shadow: 2px 10px 8px 10px #888888;
+    max-width: calc(48vw + 8em);
+    height:10em;
+    text-align:center;
+    padding:2em;
+    top:10%;
+    left:40%;
+    position: absolute;
+    background-color: $background-color;
+    .modal{
+      text-align:center;
     }
 }

@@ -18,7 +18,9 @@ class SignIn extends React.Component {
             [e.target.id]: e.target.value
         })
     }
-    
+    medsosClick = e => {
+        alert(`this feature haven't been develop yet! Please login using your email`)
+    }
     getData = async()=> {
         try{
             const res = await axios.post(`${baseUrl}`, {
@@ -66,9 +68,9 @@ class SignIn extends React.Component {
                     <h1>Sign in to Task Manager</h1>
                     <div className="icons-container">
                         <ul>
-                            <li><Link to="/register-form" className="media-icon fb"><FaFacebookF size="2x"/></Link></li>
-                            <li><Link to="/register-form" className="media-icon gp"><FaGooglePlusG size="2x"/></Link></li>
-                            <li><Link to="/register-form" className="media-icon li"><FaLinkedinIn size="2x"/></Link></li>
+                            <li><Link to="#" onClick={()=>{this.medsosClick()}}className="media-icon fb"><FaFacebookF size="2x"/></Link></li>
+                            <li><Link to="#" onClick={()=>{this.medsosClick()}}className="media-icon gp"><FaGooglePlusG size="2x"/></Link></li>
+                            <li><Link to="#" onClick={()=>{this.medsosClick()}}className="media-icon li"><FaLinkedinIn size="2x"/></Link></li>
                         </ul>
                     </div>
                     <p>or use your email for registation</p>

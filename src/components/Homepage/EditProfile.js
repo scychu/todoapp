@@ -1,12 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "../../style/sass/Dashboard.scss";
-import FormAdd from "./FormAdd";
-import TodoList from "./TodoList";
 import {FaUserCircle, FaArrowLeft, FaPencilAlt} from "react-icons/fa";
-import NoContent from "./NoContent";
 import axios from "axios";
-import Spinner from "../helper/Spinner";
+import ModalInput from "../helper/ModalInput";
+// import Spinner from "../helper/Spinner";
 
 class EditProfile extends React.Component {
     state={
@@ -15,6 +13,7 @@ class EditProfile extends React.Component {
         id:"",
         image:"",
         isLoading:false,
+        isModalOpen:false,
         data:[]
     }
     getUserProfile = async () => {
@@ -41,7 +40,7 @@ class EditProfile extends React.Component {
     updateProfile = async (id)=> {
         const token = localStorage.getItem("token")
         const changes = {
-            name: "indah",
+            name: "indahnya langit biru",
             image:""
         }
         try{
@@ -63,10 +62,15 @@ class EditProfile extends React.Component {
             alert(err)
         }
     }
-
+    editName = e => {
+        this.setState({isModalOpen:true});
+    }
     logoutClick = e => {
         localStorage.removeItem('token');
         this.props.history.push("/sign-in")
+    }
+    backBtn = e => {
+        this.setState({isModalOpen:false})
     }
     
     componentDidMount(){
@@ -74,6 +78,10 @@ class EditProfile extends React.Component {
     }
 
     render(){
+        if(this.state.isModalOpen){
+            let modal = <ModalInput back={this.backBtn}/>
+            return modal
+        }
         return(
             <div className="homepage-wrapper">
                 <div className="header">
@@ -85,11 +93,14 @@ class EditProfile extends React.Component {
                 <div className="edit-profile_section">
                     <div className="edit">
                         <div className="user-profile">
+                            <h1>Edit your profile</h1>
                             {!this.state.image ?<FaUserCircle className="user-image"/>: this.state.image}
+                            <FaPencilAlt className="image-edit"/>
                             <h3>{this.state.username}</h3>  
-                            <FaPencilAlt className="pen-edit"/>
+                            <FaPencilAlt className="pen-edit" onClick={()=>this.editName()}/>
+                            <button onClick={()=> {this.updateProfile(this.state.id)}}>Save changes</button>
                         </div>
-                        <button onClick={()=> {this.updateProfile(this.state.id)}}>Save changes</button>
+                            <button onClick={()=>{this.editName()}}>cek</button>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,9 @@ class RegisterForm extends React.Component{
         data:[],
         isLoading:false
     }
+    medsosClick = e => {
+        alert(`this feature haven't been develop yet! Please register using your email`)
+    }
     getServer = async(nama,surel,sandi)=> {
         try {
             const res = await axios.post(`${baseUrl}`, {
@@ -57,9 +60,9 @@ class RegisterForm extends React.Component{
                     <h1>Created Account</h1>
                     <div className="icons-container">
                         <ul>
-                            <li><Link to="/register-form" className="media-icon fb"><FaFacebookF size="2x"/></Link></li>
-                            <li><Link to="/register-form" className="media-icon gp"><FaGooglePlusG size="2x"/></Link></li>
-                            <li><Link to="/register-form" className="media-icon li"><FaLinkedinIn size="2x"/></Link></li>
+                        <li><Link to="#" onClick={()=>{this.medsosClick()}}className="media-icon fb"><FaFacebookF size="2x"/></Link></li>
+                            <li><Link to="#" onClick={()=>{this.medsosClick()}}className="media-icon gp"><FaGooglePlusG size="2x"/></Link></li>
+                            <li><Link to="#" onClick={()=>{this.medsosClick()}}className="media-icon li"><FaLinkedinIn size="2x"/></Link></li>
                         </ul>
                     </div>
                     <p>or use your email for registation</p>
