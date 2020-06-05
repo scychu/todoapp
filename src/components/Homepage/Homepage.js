@@ -14,7 +14,8 @@ class Homepage extends React.Component {
         newLists:[],
         username:"",
         image:"",
-        isLoading:false
+        isLoading:false,
+        data:[]
     }
     getUser = async () => {
         const token = localStorage.getItem("token")
@@ -45,9 +46,10 @@ class Homepage extends React.Component {
                     Authorization :token
                 }
             })
+            this.setState({data:res.data})
             this.setState({newLists: res.data.data.tasks})
             this.setState({isLoading:false})
-            console.log(res.data)
+            console.log(this.state.data)
         } catch(error){
             alert(error)
             this.setState({isLoading:false})
@@ -132,7 +134,7 @@ class Homepage extends React.Component {
                                 <h6>Important</h6>
                             </div>
                             <div className="todo-lists">
-                                {this.state.isLoading ? <Spinner/>: (!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} getAll={this.getAllTask} delLists={this.delLists} more={this.getMoreData}/>)}
+                                {this.state.isLoading ? <Spinner/>: (!this.state.newLists.length ? <NoContent/> : <TodoList todo={this.state.newLists} getAll={this.getAllTask} delLists={this.delLists} more={this.getMoreData} info={this.state.data}/>)}
                             </div>
                         </div>
                     </div>

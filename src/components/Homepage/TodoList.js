@@ -8,7 +8,10 @@ class TodoList extends React.Component {
         importance:"",
         completed:"",
         isLoading:false,
-        isChecked:false
+        isChecked:false,
+        data:[],
+        newLists:[],
+        moreData: false,
     }
     
     updateImportant = async(id,importance,completed) => {
@@ -67,13 +70,36 @@ class TodoList extends React.Component {
                     Authorization:token
                 }
             })
-            console.log(res)
+            this.setState({data:res.data})
+            this.setState({newLists: res.data.data.tasks})
+            console.log(this.state.newLists)
+
             this.setState({isLoading:false})
+            this.setState({moreData:true})
+            this.props.getAll()
+            // console.log(this.state.data.data.data.tasks)
+            console.log(this.state.data)
+            // console.log(this.props.info)
+            // this.setState({isLoading:false})
         }catch (err){
             console.log(err)
         }
     }
     
+
+    // rest = this.state.newLists.map(item=>
+    //     <div key={item.id} className="todo-list">
+    //         <form>
+    //             {/* <input id="box" type="checkbox" className={item.completed ? "completed" :"not-completed"}onClick={()=>{this.checkBox(item.id,item.importance,item.completed)}}/> */}
+    //             {item.completed ? <FaCheck className="completed" onClick={()=>this.updateComplete(item.id,item.completed)}/> : <FaSquare className="not-completed" onClick={()=>this.updateComplete(item.id,item.completed)}/>}
+    //             <p className={item.completed ? "complete": "not-complete"}>{item.name}</p>
+    //             <FaStar className={item.importance ? "important icon" : "not-important icon"} onClick={()=> {this.updateImportant(item.id,item.importance,item.completed)}}/>
+    //             <FaPencilAlt className="edit icon" onClick={()=>{
+    //         console.log(`id:${item.id},important :${item.importance},completed: ${item.completed}`)}}/>
+    //             <FaTrash className="delete icon" onClick={()=>{this.props.delLists(item.id)}}/>
+    //         </form>
+    //     </div>
+    //     )
     result = this.props.todo.map(item=>
         <div key={item.id} className="todo-list">
             <form>
@@ -93,9 +119,6 @@ class TodoList extends React.Component {
         return(
             <div>
                 {this.result}
-                <div>
-                    <button onClick={()=> this.props.more()}>more...</button>
-                </div>
             </div>
 
         )
