@@ -60,9 +60,9 @@ class RegisterForm extends React.Component{
                     <h1>Created Account</h1>
                     <div className="icons-container">
                         <ul>
-                        <li><Link to="#" onClick={()=>{this.medsosClick()}}className="media-icon fb"><FaFacebookF size="2x"/></Link></li>
-                            <li><Link to="#" onClick={()=>{this.medsosClick()}}className="media-icon gp"><FaGooglePlusG size="2x"/></Link></li>
-                            <li><Link to="#" onClick={()=>{this.medsosClick()}}className="media-icon li"><FaLinkedinIn size="2x"/></Link></li>
+                        <li><Link to="#" onClick={()=>{this.medsosClick()}}><FaFacebookF className="media-icon fb"/></Link></li>
+                            <li><Link to="#" onClick={()=>{this.medsosClick()}}><FaGooglePlusG className="media-icon gp"/></Link></li>
+                            <li><Link to="#" onClick={()=>{this.medsosClick()}}><FaLinkedinIn className="media-icon li"/></Link></li>
                         </ul>
                     </div>
                     <p>or use your email for registation</p>
