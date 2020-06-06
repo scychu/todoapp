@@ -5,34 +5,48 @@
     "node": "12.17.0",
     "yarn": "1.22.4"
   },
+<<<<<<< HEAD
   "homepage": "https://scychu.github.io/todoapp",
   "resolutions": {
     "**/@babel/runtime": "7.5.0"
   },
+=======
+>>>>>>> c22f8d8e668206a3c9f9852a5ec280059d3b340b
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+<<<<<<< HEAD
     "babel-runtime": "^6.26.0",
     "gh-pages": "^3.0.0",
+=======
+>>>>>>> c22f8d8e668206a3c9f9852a5ec280059d3b340b
     "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
     "react-router-dom": "^5.2.0",
+<<<<<<< HEAD
     "react-scripts": "^3.4.1",
+=======
+    "react-scripts": "3.4.1",
+>>>>>>> c22f8d8e668206a3c9f9852a5ec280059d3b340b
     "redux": "^4.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+<<<<<<< HEAD
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
+=======
+    "eject": "react-scripts eject"
+>>>>>>> c22f8d8e668206a3c9f9852a5ec280059d3b340b
   },
   "eslintConfig": {
     "extends": "react-app"

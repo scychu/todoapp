@@ -33,9 +33,13 @@ class Homepage extends React.Component {
             // this.setState({image: res.data.data.userData})
         }
         catch (err){
+<<<<<<< HEAD
             console.log(err)
             alert(`Please login first!`)
             this.props.history.push('/sign-in')
+=======
+            alert(err)
+>>>>>>> c22f8d8e668206a3c9f9852a5ec280059d3b340b
         }
     }    
 
@@ -53,7 +57,11 @@ class Homepage extends React.Component {
             this.setState({isLoading:false})
             console.log(this.state.data)
         } catch(error){
+<<<<<<< HEAD
             console.log(error)
+=======
+            alert(error)
+>>>>>>> c22f8d8e668206a3c9f9852a5ec280059d3b340b
             this.setState({isLoading:false})
         }
     }
