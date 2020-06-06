@@ -6,6 +6,9 @@
     "yarn": "1.22.4"
   },
   "homepage":"https://scychu.github.io/todoapp",
+  "resolutions": {
+    "**/@babel/runtime": "7.5.0"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
