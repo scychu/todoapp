@@ -1,0 +1,277 @@
+@import "./variable.scss";
+
+// styling for homepage
+.homepage-wrapper,
+.my-day_wrapper {
+    margin:2% auto;
+    box-shadow: 2px 10px 8px 10px #888888;
+    max-width: calc(48vw + 8em);
+    .header {
+        position: relative;
+        width:100%;
+        .header-nav {
+            background-color: $primary-color;
+            position: relative;
+            height:5em;
+            display: flex;
+            justify-content: flex-end;
+            .back-btn {
+                position: absolute;
+                left:10%;
+                top:30%;
+                height:2em;
+                width:2em;
+                color:$background-color;
+            }
+            button{
+                @include mixin-button;
+                position: absolute;
+                right:10%;
+                top:25%;
+            }
+            button:hover {
+                @include btn-hover;
+            }
+        }
+    }
+    .content {
+        background-color: $background-color;
+        display: flex;
+        padding:0 2em;
+        .left-nav {
+            height:75vh;
+            .user-profile {
+                display:flex;
+                align-items: center;
+                .user-image{
+                    width:3em;
+                    height:3em;
+                    padding:1em;
+                }
+               .edit-profile{
+                   display: inline-block;
+                   h3 {
+                       margin:0;
+                   }
+                   .link{
+                       font-size: 1vw;
+                       color:$third-color;
+                       text-decoration: none;
+                    }
+                    .link:hover {
+                        @include link-hover;
+                    }
+               }
+            }
+            .nav-menu {
+                padding-left: 4.5em;
+                padding-top:2em;
+            }
+            margin-top:1em;
+            background-color: $background-color;
+            text-align: left;
+            width:15vw;
+            ul{
+                padding:0;
+                .link {
+                    @include link-style;
+                    color:#000;
+                    margin-bottom:2em;
+                    padding:0.5em;
+                    font-size: 1.2vw;
+                }
+                .link:hover {
+                    @include link-hover;
+                }
+                .link:active {
+                    @include link-clicked;
+                }
+                li {
+                    list-style: none;
+                    padding-bottom:2em;
+                    font-size: 1.2vw;
+                }
+            }
+        }
+        .main-content{
+            margin-top:1em;
+            margin-left:1em;
+            box-sizing: border-box;
+            width:70%;
+            height:75vh;
+            .task-list {
+                .todo-title {
+                    width:29vw;
+                    display: flex;
+                    justify-content:space-around;
+                }
+                .todo-lists{
+                    overflow: scroll;
+                    position: relative;
+                    height:50vh;
+                    .no-content {
+                        margin:0 auto;
+                        p {
+                            font-size:1em;
+                            text-align: center;
+                        }
+                    }
+                    .todo-list {
+                        form{
+                            @include todo-style;
+                            height:3em;
+                            padding:0 1em;
+                            margin-bottom: 1em;
+                            p {
+                                font-size: 1vw;
+                                padding-left:1em;
+                                width:15em;
+                                overflow:hidden
+                            }
+                            .icon{
+                            @include icons;
+                            
+                            }
+                            .important {
+                                position: absolute;
+                                right:35%;
+                                color:$important-color;
+                            }
+                            .not-important {
+                                position: absolute;
+                                right:35%;
+                                color:$background-color;
+                            }
+                            .edit {
+                                position: absolute;
+                                right:15%;
+                            }
+                            .delete {
+                                position: absolute;
+                                right:0%;
+                            }
+                            .check {
+                                position: absolute;
+                                visibility: collapse;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.starred {
+    color:$important-color
+}
+
+::-webkit-scrollbar {
+    width:0px;
+    background: transparent;
+}
+
+.add-todo {
+    @include todo-style;
+    padding:1em;
+    form{
+        display:flex;
+        width:100%;
+        input{
+            border:none;
+            border-bottom: 2px solid $second-color;
+            width:100%;
+            padding:1em;
+        }
+        input:focus{
+            @include input-clicked
+        }
+        .add-icon{
+            color:$second-color;
+            @include icons;
+            padding:1em;
+        }
+    }
+}
+
+.spinner {
+    @include spinner;
+    position: absolute;
+    top:10%;
+    left:40%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.edit-profile_section {
+    height:75vh;
+    display:flex;
+    justify-content: center;
+    .edit{
+        text-align: center;
+        width:50%;
+        background-color: $background-color;
+        .user-profile{
+            margin:1em;
+            text-align: center;
+            position: relative;
+            .edit-inner {
+                position: relative;
+                button {
+                    position: absolute;
+                    left:37%;
+                }
+            }
+            .user-image {
+                width:5em;
+                height:5em;
+            }
+            .user-image:hover .image-edit{
+                visibility: visible;
+                opacity: 1;
+            }
+            .image-edit{
+                position: absolute;
+                top:20%;
+                left:50%;
+                visibility: hidden;
+                transition: opacity .2s, visibility .2s;
+                color:red;
+                background: rgba(29, 106, 154, 0.72);
+            }
+            
+        }
+        
+    }
+}
+.modal-wrapper{
+    margin:2% auto;
+    box-shadow: 2px 10px 8px 10px #888888;
+    max-width: calc(48vw + 8em);
+    height:10em;
+    text-align:center;
+    padding:2em;
+    top:10%;
+    left:40%;
+    position: absolute;
+    background-color: $background-color;
+    .modal{
+      text-align:center;
+    }
+}
+
+.complete {
+    text-decoration: line-through black;
+    color:$second-color
+}
+
+.not-completed {
+    color:$background-color;
+}
+
+.completed {
+    color:$primary-color;
+}

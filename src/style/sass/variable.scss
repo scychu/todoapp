@@ -1,0 +1,109 @@
+$primary-color: #0078D7;
+$background-color:#E5E5E5;
+$second-color:#C4C4C4;
+$third-color:rgb(126, 126, 126);
+$important-color:#FEC112;
+
+@mixin whiteColor {
+    color:#fff;
+    top:30%;
+    position: relative;
+}
+
+@mixin mixin-button {
+    width: 12em;
+    padding:1em;
+    border-radius: 2.5rem;
+    background-color: transparent;
+    border:1px solid $second-color;
+    font-weight: bold;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color:#fff;
+}
+@mixin btn-hover {
+    background-color: #fff;
+    color:$primary-color;
+}
+
+@mixin mixin-input {
+    display: block;
+    bottom:0;
+    margin:1em;
+    padding:0.5em;
+    border-radius: 0.4em;
+    border:1px solid $second-color;
+    font-size:1em;
+    width: 90%;
+    box-sizing:border-box;
+}
+@mixin input-clicked {
+    outline:none;
+}
+@mixin medsos-icon {
+    width:4em;
+    height:4em;
+    border:2px solid #C4C4C4;
+    border-radius: 2rem;
+    margin:1vh;
+    padding:1rem;
+    box-sizing:border-box;
+    display: inline-block;
+    color:#000;
+    transition-duration: 0.4s;
+}
+@mixin icon-hover {
+    color:$primary-color;
+}
+
+@mixin icons {
+    width:1em;
+    height:1em;
+    padding:1em;
+    cursor: pointer;
+}
+
+@mixin todo-style {
+    display: flex;
+    background-color: #fff;
+    text-align: left;
+    align-items: center;
+    position: relative;
+    border-radius: 0.2em;
+}
+
+
+@mixin link-style {
+    text-decoration: none;
+    font-weight:lighter;
+}
+
+@mixin link-clicked {
+    background-color: #fff;
+    border-radius: 0.2em;
+    box-shadow :2px 2px 2px 2px #888888;
+}
+
+@mixin link-hover {
+    text-decoration: underline $primary-color;
+}
+
+
+@mixin spinner {
+    border: 1em solid #f3f3f3; /* Light grey */
+    border-top: 1em solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    animation: spin 2s linear infinite;
+  }
+  
+@mixin spinner-spin{
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+}  
+@mixin button-spin {
+
+}
